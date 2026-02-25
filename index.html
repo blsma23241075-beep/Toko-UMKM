@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanaya Red </title>
+    <style>
+        /* --- CSS STYLING --- */
+        :root {
+            --ocean-blue: #0077b6;
+            --deep-sea: #023e8a;
+            --sand: #fefae0;
+            --coral: #fb8500;
+            --water-gradient: linear-gradient(180deg, #caf0f8 0%, #ade8f4 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--water-gradient);
+            color: #333;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* --- Navigation Menu --- */
+        nav {
+            background: var(--deep-sea);
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--coral);
+        }
+
+        /* --- Header --- */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--ocean-blue);
+        }
+
+        .logo-container img {
+            width: 80px;
+            animation: swim 3s ease-in-out infinite;
+        }
+
+        @keyframes swim {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            50% { transform: translateX(15px) rotate(5deg); }
+        }
+
+        header h1 {
+            margin: 0.5rem 0;
+            color: var(--deep-sea);
+            font-size: 2.5rem;
+            text-shadow: 2px 2px #fff;
+        }
+
+        /* --- Container & Sections --- */
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            background: white;
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: none; /* SEMUA DISEMBUNYIKAN SECARA DEFAULT */
+        }
+
+        /* Menampilkan halaman yang aktif */
+        section.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h2 {
+            color: var(--deep-sea);
+            border-left: 5px solid var(--coral);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* --- Profil & Produk Grid --- */
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; }
+        .badge { background: var(--coral); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin-bottom: 10px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .card { background: #fff; border: 2px solid #e0f2f1; border-radius: 20px; padding: 15px; text-align: center; }
+        .card img { width: 100%; border-radius: 15px; height: 180px; object-fit: cover; }
+        .price { font-weight: bold; color: #2e7d32; font-size: 1.2rem; display: block; margin-top: 10px; }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--deep-sea);
+            color: white;
+            padding: 50px 20px 20px;
+            border-top-left-radius: 50% 20px;
+            border-top-right-radius: 50% 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .contact-info { display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 30px; }
+        .copy { font-size: 0.8rem; opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
+
+        /* --- Animasi Bubble --- */
+        .bubble { position: fixed; background: rgba(255,255,255,0.3); border-radius: 50%; pointer-events: none; z-index: -1; animation: rise 10s infinite ease-in; }
+        @keyframes rise { 0% { bottom: -100px; } 100% { bottom: 110vh; } }
+    </style>
+</head>
+<body>
+
+    <div class="bubble" style="width: 20px; height: 20px; left: 10%;"></div>
+    <div class="bubble" style="width: 40px; height: 40px; left: 80%; animation-delay: 3s;"></div>
+
+    <nav>
+        <a onclick="showPage('profil')">Beranda</a>
+        <a onclick="showPage('produk')">Produk</a>
+        <a href="#kontak">Kontak</a>
+    </nav>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/2271/2271068.png" alt="Logo">
+        </div>
+        <h1>Tanaya Red 🌊</h1>
+        <p>"Sehat Ikannya, Puas Pelanggannya."</p>
+    </header>
+
+    <div class="container">
+        
+        <section id="profil" class="active">
+            <div class="profile-grid">
+                <div>
+                    <span class="badge">Est. 2022 🗓️</span>
+                    <h2>Tentang Kami ⚓</h2>
+                    <p>Toko UMKM ini bergerak di bidang jual beli ikan hias, menyediakan Ikan Arwana Super Red kualitas unggul, serta Ikan Gurame Padang yang segar dan sehat untuk Anda. Kami berkomitmen untuk selalu menghadirkan perpaduan antara standar kualitas tinggi, serta pelayanan yang amanah demi menjamin kepuasan setiap pelanggan. Usaha ini dikelola langsung secara personal oleh Bapak Hartanto, yang selalu siap memberikan layanan  bagi para pencinta ikan hias.</p>
+                    <p><strong>Jenis Usaha:</strong> Jual beli ikan </p>
+                </div>
+                <div style="text-align: center; font-size: 5rem;">🐠🐡🐙</div>
+            </div>
+        </section>
+
+        <section id="produk">
+            <h2>Produk yang Dijual 🧊</h2>
+            <div class="product-grid">
+                <div class="card">
+                    <img src="gambar/ikan arwana super red.jfif" alt="Arwana">
+                    <h3>Ikan Arwana Super Red </h3>
+                    <p>Ikan arwana super red, panjang 50cm, body mulus, ekor lebar, kepala sendok, dayung panjang, gen merah menyala.</p>
+                    <span class="price">Rp 30.000.000</span>
+                </div>
+                <div class="card">
+                    <img src="gambar/ikan gurame padang.jfif" alt="Gurame">
+                    <h3>Gurame Padang </h3>
+                    <p>Ukuran 5 jari berat kurang lebih 1kg, untuk tankmate arwana.</p>
+                    <span class="price">Rp 200.000/ekor</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer id="kontak">
+        <div class="container">
+            <p>Hubungi Kami! 👨‍✈️</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <p>📍 <strong>Komplek Pondok Bahar Permai Blok D 5 No 16</strong>Jalan Rajawali 2 Karang Tengah Tangerang</p>
+                </div>
+                <div class="contact-item">
+                    <p>📱 WhatsApp: <br><strong>0818-740-044</strong></p>
+                    <div class="social-icons">
+                        📸 instagram: @tanayared | 📘 tiktok: @tanayared
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy">
+             <p>&copy; 2026 Tanaya Red - All Rights Reserved 🐟</p>
+            <p>Designed with ❤️ by <strong>[Kinaryosih Anatanaya]</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // 1. Ambil semua section
+            const sections = document.querySelectorAll('section');
+            
+            // 2. Sembunyikan semua section (hapus class active)
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // 3. Tampilkan section yang dipilih
+            const selectedSection = document.getElementById(pageId);
+            selectedSection.classList.add('active');
+
+            // 4. Gulir ke atas agar konten baru terlihat dari awal
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
+</body>
+</html>
